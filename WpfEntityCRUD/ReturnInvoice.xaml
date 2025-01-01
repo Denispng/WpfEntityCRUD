@@ -1,0 +1,160 @@
+﻿<Window x:Class="WpfEntityCRUD.ReturnInvoice"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfEntityCRUD"
+        mc:Ignorable="d"
+        Title="ReturnInvoice"  Height="750" Width="550" FontFamily="calibri" Background="White">
+    <Grid>
+
+        <!-- Define Rows for layout -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Invoice Title -->
+            <RowDefinition Height="Auto"/>
+            <!-- Invoice Number -->
+            <RowDefinition Height="Auto"/>
+            <!-- Customer Info -->
+            <RowDefinition Height="Auto"/>
+            <!-- Item Info -->
+            <RowDefinition Height="Auto"/>
+            <!-- Taxes -->
+            <RowDefinition Height="Auto"/>
+            <!-- Total Amount -->
+            <RowDefinition Height="Auto"/>
+            <!-- Payment Terms -->
+            <RowDefinition Height="Auto"/>
+            <!-- Shipping -->
+            <RowDefinition Height="Auto"/>
+            <!-- Action Buttons -->
+            <RowDefinition Height="Auto"/>
+            <!-- Placeholder for space -->
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="captureContainer" Background="White">
+            <!-- Title of the Invoice -->
+            <TextBox Background="Transparent" Text="Your Company name" Height="20" />
+            <!-- Title of the Invoice -->
+            <TextBlock
+        Text="Return Invoice" Grid.Row="0" Margin="0,20" HorizontalAlignment="Center" FontSize="24"/>
+            <!-- Invoice Number -->
+            <StackPanel
+        Grid.Row="1" Orientation="Horizontal" Margin="0,10">
+                <TextBlock
+        Text="Invoice Number: " VerticalAlignment="Center" Width="150"/>
+                <TextBox
+        Width="200" x:Name="invoiceNumberTextBox" Margin="5,0" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <GroupBox
+        Grid.Row="2" Margin="0,10,0,10" Header="Customer Information" FontSize="14">
+                <StackPanel
+        Margin="0,10" Orientation="Vertical">
+                    <StackPanel
+        Margin="0,5" Orientation="Horizontal">
+                        <TextBlock
+        Text="Customer Name: " VerticalAlignment="Center" Width="150"/>
+                        <TextBox
+        Width="300" x:Name="CustomerName" Margin="5,0" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <StackPanel
+        Margin="0,5" Orientation="Horizontal">
+                        <TextBlock
+        Text="Customer Address: " VerticalAlignment="Center" Width="150"/>
+                        <TextBox
+        Width="300" x:Name="CustomerAddress" Margin="5,0" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <StackPanel
+        Margin="0,5" Orientation="Horizontal">
+                        <TextBlock
+        Text="Customer Contact: " VerticalAlignment="Center" Width="150"/>
+                        <TextBox
+        Width="300" x:Name="CustomerContact" Margin="5,0" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <StackPanel
+Margin="0,5" Orientation="Horizontal">
+                        <TextBlock
+Text="Date:" VerticalAlignment="Center" Width="150"/>
+                        <DatePicker
+Width="300"  Margin="5,0" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
+        Grid.Row="4" Margin="0,10,0,10" Header="Item Details" FontSize="14">
+                <StackPanel
+        HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <StackPanel
+        Orientation="Horizontal">
+                        <TextBlock
+        Height="20" Text="Name" Width="100"/>
+                        <TextBox
+        Width="100" x:Name="Description" Margin="55,0" Height="15" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <StackPanel
+        Orientation="Horizontal">
+                        <TextBlock
+        Height="20" Text="Quantity" Width="100"/>
+                        <TextBox
+        Width="100" x:Name="Quantity" Margin="55,0" Height="16" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <StackPanel
+        Orientation="Horizontal">
+                        <TextBlock
+        Height="20" Text="Unit Price" Width="100"/>
+                        <TextBox
+        Width="100" x:Name="Price" Margin="55,0" Height="16" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <StackPanel
+        Orientation="Horizontal">
+                        <TextBlock
+        Height="20" Text="Total Price" Width="100"/>
+                        <TextBox
+        Width="100" x:Name="Total" Margin="55,0" Height="15" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <!-- Taxes -->
+            <StackPanel
+        Grid.Row="5" Orientation="Horizontal" Margin="0,10">
+                <TextBlock
+        Text="Taxes (e.g. VAT): " VerticalAlignment="Center" Width="150"/>
+                <TextBox
+        Width="100" x:Name="Taxes" Margin="5,0" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <!-- Total Amount Due -->
+            <StackPanel
+        Grid.Row="6" Orientation="Horizontal" Margin="0,10">
+                <TextBlock
+        Text="Total Amount Due: " VerticalAlignment="Center" Width="150"/>
+                <TextBox
+        Width="100" x:Name="TotalAmountDue" Margin="5,0" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <!-- Payment Terms -->
+            <StackPanel
+        Grid.Row="7" Orientation="Horizontal" Margin="0,10">
+                <TextBlock
+        Text="Payment Terms: " VerticalAlignment="Center" Width="150"/>
+                <TextBox
+        Width="300" x:Name="PaymentTerms" Margin="5,0" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <!-- Shipping Method -->
+            <StackPanel
+        Grid.Row="8" Orientation="Horizontal" Margin="0,10">
+                <TextBlock
+        Text="Shipping Method: " VerticalAlignment="Center" Width="150"/>
+                <TextBox
+        Width="300" x:Name="ShippingMethod" Margin="5,0" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <StackPanel Grid.Row=" 9">
+                <Rectangle Fill="White" HorizontalAlignment="Stretch" Height="130"/>
+            </StackPanel>
+
+        </StackPanel>
+        <!-- Action Buttons (Save/Cancel) -->
+        <StackPanel Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Left" Margin="203,9,0,25" Width="306">
+            <Button Content="Save Invoice" Click="SaveAsImage_Click" Margin="5"  Background="#4CAF50" Foreground="White" BorderBrush="#FF4D4D" FontWeight="Bold" />
+            <Button Content="Cancel" Width="80" Background="#FF4D4D " Height="35" Margin="5" Foreground="White" BorderBrush="#4CAF50" FontWeight="Bold" Click="Button_Click1"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

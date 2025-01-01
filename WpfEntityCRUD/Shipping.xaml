@@ -1,0 +1,148 @@
+﻿<Page x:Class="WpfEntityCRUD.Shipping"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfEntityCRUD"
+      mc:Ignorable="d" 
+     
+      Title="Shipping">
+
+    <DockPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width = "16*" ></ColumnDefinition >
+                <ColumnDefinition Width = "60*" ></ColumnDefinition >
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column = "0" Background = "#272B2F" >
+
+
+                <StackPanel Margin="0,20,0,0">
+                    <!-- Header -->
+                    <TextBlock Text="Shipping" 
+                  Foreground="White" 
+                  FontFamily="Segoe UI" 
+                  FontSize="18" 
+                  FontWeight="Bold" 
+                  HorizontalAlignment="Center" 
+                  Margin="0,10,0,20"/>
+
+                    <!-- Navigation Buttons -->
+                    <Button Content="Back" 
+               Margin="20,10" 
+               Height="40" 
+               Background="#0078D7" 
+               Foreground="White" 
+               FontWeight="Bold"
+               BorderThickness="0"
+               Click="BackBtn_Click" />
+
+
+                </StackPanel>
+            </Grid>
+
+
+            <Grid Grid.Column="1" Margin="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <TextBlock 
+            Text="Shipping Integration System" 
+            FontWeight="Bold" 
+            FontSize="20" 
+            Foreground="Black" 
+            HorizontalAlignment="Center" 
+            Margin="0,0,0,20" 
+            Grid.Row="0" />
+
+                    <!-- Main Content -->
+                    <StackPanel Grid.Row="1" Margin="10">
+
+                        <!-- Calculate Shipping Rates Section -->
+                        <Border BorderBrush="#ccc" BorderThickness="1" CornerRadius="10" Padding="15" Background="#f9f9f9" Margin="0,0,0,10">
+                            <StackPanel Margin="0,5,0,0">
+                                <TextBlock Text="1. Calculate Shipping Rates" FontWeight="Bold" FontSize="16" Foreground="Black" Margin="0,0,0,10" />
+                                <Grid Margin="0,5,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                    <TextBlock Text="Package Weight" Foreground="Gray" VerticalAlignment="Center" />
+                                    <TextBox x:Name="txtWeight" Width="200" VerticalAlignment="Center" Margin="0,0,40,0" />
+                                    </StackPanel>
+                                    <Button  Click="Button_Click"
+                            Content="Get Rates" 
+                            Width="120" 
+                            Margin="10,0,0,0" 
+                            Grid.Column="1" 
+                            Background="#6772e5" 
+                            Foreground="White" 
+                            BorderBrush="Transparent" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Generate Shipping Label Section -->
+                        <Border BorderBrush="#ccc" BorderThickness="1" CornerRadius="10" Padding="15" Background="#f9f9f9" Margin="0,0,0,10">
+                            <StackPanel>
+                                <TextBlock Text="2. Generate Shipping Label" FontWeight="Bold" FontSize="16" Foreground="Black" Margin="0,0,0,10" />
+                                <Button Click="btnGenerateLabel_Click"
+                        Content="Generate Label" 
+                        Width="180" 
+                        HorizontalAlignment="Center" 
+                        Background="#6772e5" 
+                        Foreground="White" 
+                        BorderBrush="Transparent" />
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Track Shipment Section -->
+                        <Border BorderBrush="#ccc" BorderThickness="1" CornerRadius="10" Padding="15" Background="#f9f9f9">
+                            <StackPanel>
+                                <TextBlock Text="3. Track Shipment" FontWeight="Bold" FontSize="16" Foreground="Black" Margin="0,0,0,10" />
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,10,0,10">
+                                    <Label Content="Carrier Code" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                    <ComboBox Name="cmbCarrier" Width="250" HorizontalAlignment="Center" Margin="0,5,0,5" />
+                                    <Label Content="Tracking Number" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                    <TextBox Name="txtTrackingNumber" Width="250" HorizontalAlignment="Center" Margin="0,5,0,10" />
+                                </StackPanel>
+                                <Button 
+                                    Click="btn_Click" 
+                        Content="Track Shipment" 
+                        Width="180" 
+                        Margin="0,10,0,0" 
+                        HorizontalAlignment="Center" 
+                        Background="#6772e5" 
+                        Foreground="White" 
+                        BorderBrush="Transparent" />
+                                <TextBlock 
+                        Name="txtTrackingResult" 
+                        Text="Shipping tracking and rate calculation services are temporarily unavailable. Please visit the carrier's website for assistance with tracking or rate inquiries. Alternatively, you may contact our support team at denisshchadin@gmail.com for further support." 
+                        TextWrapping="Wrap" 
+                        Width="350" 
+                        Height="100" 
+                        Margin="10" 
+                        Background="#eef" 
+                        Padding="5" 
+                        FontSize="14" 
+                        Foreground="Black" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+
+            
+        
+
+    </DockPanel >
+
+
+
+</Page>

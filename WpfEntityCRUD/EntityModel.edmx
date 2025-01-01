@@ -1,0 +1,824 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="wpfCrudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aisles">
+          <Key>
+            <PropertyRef Name="AisleID" />
+          </Key>
+          <Property Name="AisleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="LayerCount" Type="int" />
+          <Property Name="CellCount" Type="int" />
+          <Property Name="RowCount" Type="int" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="warehousesId" Type="int" />
+        </EntityType>
+        <EntityType Name="Cells">
+          <Key>
+            <PropertyRef Name="CellID" />
+          </Key>
+          <Property Name="CellID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AisleID" Type="int" />
+          <Property Name="XCoordinate" Type="int" />
+          <Property Name="YCoordinate" Type="int" />
+          <Property Name="ZCoordinate" Type="int" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="company_id" />
+          </Key>
+          <Property Name="company_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="created_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="members">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="Despatched" Type="nvarchar" MaxLength="50" />
+          <Property Name="Supplier" Type="nvarchar" MaxLength="50" />
+          <Property Name="PackingList" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity_r" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sold" Type="nvarchar" MaxLength="50" />
+          <Property Name="Invoice" Type="nvarchar" MaxLength="50" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="100" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+          <Property Name="warehousesId" Type="int" />
+        </EntityType>
+        <EntityType Name="PackingList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Quantity" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="company_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChangedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ChangeDate" Type="datetime" Nullable="false" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="company_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AssignedTo" Type="int" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="company_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Warehouses">
+          <Key>
+            <PropertyRef Name="warehousesId" />
+          </Key>
+          <Property Name="warehousesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="255" />
+          <Property Name="company_id" Type="int" />
+        </EntityType>
+        <Association Name="FK__Cells__AisleID__17F790F9">
+          <End Role="Aisles" Type="Self.Aisles" Multiplicity="0..1" />
+          <End Role="Cells" Type="Self.Cells" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aisles">
+              <PropertyRef Name="AisleID" />
+            </Principal>
+            <Dependent Role="Cells">
+              <PropertyRef Name="AisleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cells__Id__756D6ECB">
+          <End Role="members" Type="Self.members" Multiplicity="1" />
+          <End Role="Cells" Type="Self.Cells" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cells">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__AssignedT__531856C7">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="AssignedTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__CreatedBy__540C7B00">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Aisles_Warehouses">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="0..1" />
+          <End Role="Aisles" Type="Self.Aisles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="warehousesId" />
+            </Principal>
+            <Dependent Role="Aisles">
+              <PropertyRef Name="warehousesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Cells" Type="Self.Cells" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="Cells">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company1">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Aisles" Type="Self.Aisles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="Aisles">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="members" Type="Self.members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="members">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_Warehouses">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="0..1" />
+          <End Role="members" Type="Self.members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="warehousesId" />
+            </Principal>
+            <Dependent Role="members">
+              <PropertyRef Name="warehousesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PackingList_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="PackingList" Type="Self.PackingList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="PackingList">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskHistory_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="TaskHistory" Type="Self.TaskHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="TaskHistory">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warehouses_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="Warehouses">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wpfCrudModelStoreContainer">
+          <EntitySet Name="Aisles" EntityType="Self.Aisles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cells" EntityType="Self.Cells" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="members" EntityType="Self.members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackingList" EntityType="Self.PackingList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskHistory" EntityType="Self.TaskHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouses" EntityType="Self.Warehouses" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cells__AisleID__17F790F9" Association="Self.FK__Cells__AisleID__17F790F9">
+            <End Role="Aisles" EntitySet="Aisles" />
+            <End Role="Cells" EntitySet="Cells" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cells__Id__756D6ECB" Association="Self.FK__Cells__Id__756D6ECB">
+            <End Role="members" EntitySet="members" />
+            <End Role="Cells" EntitySet="Cells" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__AssignedT__531856C7" Association="Self.FK__Tasks__AssignedT__531856C7">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__CreatedBy__540C7B00" Association="Self.FK__Tasks__CreatedBy__540C7B00">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Aisles_Warehouses" Association="Self.FK_Aisles_Warehouses">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Aisles" EntitySet="Aisles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company" Association="Self.FK_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Cells" EntitySet="Cells" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company1" Association="Self.FK_Company1">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Aisles" EntitySet="Aisles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_Company" Association="Self.FK_Members_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="members" EntitySet="members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_Warehouses" Association="Self.FK_Members_Warehouses">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="members" EntitySet="members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PackingList_Company" Association="Self.FK_PackingList_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="PackingList" EntitySet="PackingList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskHistory_Company" Association="Self.FK_TaskHistory_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="TaskHistory" EntitySet="TaskHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Company" Association="Self.FK_Users_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warehouses_Company" Association="Self.FK_Warehouses_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Warehouses" EntitySet="Warehouses" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="wpfCrudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Aisle">
+          <Key>
+            <PropertyRef Name="AisleID" />
+          </Key>
+          <Property Name="AisleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LayerCount" Type="Int32" />
+          <Property Name="CellCount" Type="Int32" />
+          <Property Name="RowCount" Type="Int32" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="warehousesId" Type="Int32" />
+          <NavigationProperty Name="Cells" Relationship="Self.FK__Cells__AisleID__17F790F9" FromRole="Aisles" ToRole="Cells" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_Aisles_Warehouses" FromRole="Aisles" ToRole="Warehouses" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Company1" FromRole="Aisles" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Cell">
+          <Key>
+            <PropertyRef Name="CellID" />
+          </Key>
+          <Property Name="CellID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AisleID" Type="Int32" />
+          <Property Name="XCoordinate" Type="Int32" />
+          <Property Name="YCoordinate" Type="Int32" />
+          <Property Name="ZCoordinate" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Aisle" Relationship="Self.FK__Cells__AisleID__17F790F9" FromRole="Cells" ToRole="Aisles" />
+          <NavigationProperty Name="member" Relationship="Self.FK__Cells__Id__756D6ECB" FromRole="Cells" ToRole="members" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Company" FromRole="Cells" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="company_id" />
+          </Key>
+          <Property Name="company_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Aisles" Relationship="Self.FK_Company1" FromRole="Company" ToRole="Aisles" />
+          <NavigationProperty Name="Cells" Relationship="Self.FK_Company" FromRole="Company" ToRole="Cells" />
+          <NavigationProperty Name="members" Relationship="Self.FK_Members_Company" FromRole="Company" ToRole="members" />
+          <NavigationProperty Name="PackingLists" Relationship="Self.FK_PackingList_Company" FromRole="Company" ToRole="PackingList" />
+          <NavigationProperty Name="TaskHistories" Relationship="Self.FK_TaskHistory_Company" FromRole="Company" ToRole="TaskHistory" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Company" FromRole="Company" ToRole="Users" />
+          <NavigationProperty Name="Warehouses" Relationship="Self.FK_Warehouses_Company" FromRole="Company" ToRole="Warehouses" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Despatched" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PackingList" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity_r" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sold" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Invoice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <Property Name="warehousesId" Type="Int32" />
+          <NavigationProperty Name="Cells" Relationship="Self.FK__Cells__Id__756D6ECB" FromRole="members" ToRole="Cells" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Members_Company" FromRole="members" ToRole="Company" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_Members_Warehouses" FromRole="members" ToRole="Warehouses" />
+        </EntityType>
+        <EntityType Name="PackingList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="company_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_PackingList_Company" FromRole="PackingList" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="TaskHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChangedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="company_id" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_TaskHistory_Company" FromRole="TaskHistory" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AssignedTo" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Tasks__AssignedT__531856C7" FromRole="Tasks" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK__Tasks__CreatedBy__540C7B00" FromRole="Tasks" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="company_id" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Users_Company" FromRole="Users" ToRole="Company" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK__Tasks__AssignedT__531856C7" FromRole="Users" ToRole="Tasks" />
+          <NavigationProperty Name="Tasks1" Relationship="Self.FK__Tasks__CreatedBy__540C7B00" FromRole="Users" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="warehousesId" />
+          </Key>
+          <Property Name="warehousesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="company_id" Type="Int32" />
+          <NavigationProperty Name="Aisles" Relationship="Self.FK_Aisles_Warehouses" FromRole="Warehouses" ToRole="Aisles" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Warehouses_Company" FromRole="Warehouses" ToRole="Company" />
+          <NavigationProperty Name="members" Relationship="Self.FK_Members_Warehouses" FromRole="Warehouses" ToRole="members" />
+        </EntityType>
+        <Association Name="FK__Cells__AisleID__17F790F9">
+          <End Role="Aisles" Type="Self.Aisle" Multiplicity="0..1" />
+          <End Role="Cells" Type="Self.Cell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aisles">
+              <PropertyRef Name="AisleID" />
+            </Principal>
+            <Dependent Role="Cells">
+              <PropertyRef Name="AisleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Aisles_Warehouses">
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Aisles" Type="Self.Aisle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="warehousesId" />
+            </Principal>
+            <Dependent Role="Aisles">
+              <PropertyRef Name="warehousesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company1">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Aisles" Type="Self.Aisle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="Aisles">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cells__Id__756D6ECB">
+          <End Role="members" Type="Self.member" Multiplicity="1" />
+          <End Role="Cells" Type="Self.Cell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cells">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Cells" Type="Self.Cell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="Cells">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="members" Type="Self.member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="members">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PackingList_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="PackingList" Type="Self.PackingList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="PackingList">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskHistory_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="TaskHistory" Type="Self.TaskHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="TaskHistory">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warehouses_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="Warehouses">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_Warehouses">
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="members" Type="Self.member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="warehousesId" />
+            </Principal>
+            <Dependent Role="members">
+              <PropertyRef Name="warehousesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__AssignedT__531856C7">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="AssignedTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__CreatedBy__540C7B00">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wpfCrudEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Aisles" EntityType="Self.Aisle" />
+          <EntitySet Name="Cells" EntityType="Self.Cell" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="members" EntityType="Self.member" />
+          <EntitySet Name="PackingLists" EntityType="Self.PackingList" />
+          <EntitySet Name="TaskHistories" EntityType="Self.TaskHistory" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
+          <AssociationSet Name="FK__Cells__AisleID__17F790F9" Association="Self.FK__Cells__AisleID__17F790F9">
+            <End Role="Aisles" EntitySet="Aisles" />
+            <End Role="Cells" EntitySet="Cells" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Aisles_Warehouses" Association="Self.FK_Aisles_Warehouses">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Aisles" EntitySet="Aisles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company1" Association="Self.FK_Company1">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Aisles" EntitySet="Aisles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cells__Id__756D6ECB" Association="Self.FK__Cells__Id__756D6ECB">
+            <End Role="members" EntitySet="members" />
+            <End Role="Cells" EntitySet="Cells" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company" Association="Self.FK_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Cells" EntitySet="Cells" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_Company" Association="Self.FK_Members_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="members" EntitySet="members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PackingList_Company" Association="Self.FK_PackingList_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="PackingList" EntitySet="PackingLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskHistory_Company" Association="Self.FK_TaskHistory_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="TaskHistory" EntitySet="TaskHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Company" Association="Self.FK_Users_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warehouses_Company" Association="Self.FK_Warehouses_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Warehouses" EntitySet="Warehouses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_Warehouses" Association="Self.FK_Members_Warehouses">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="members" EntitySet="members" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__AssignedT__531856C7" Association="Self.FK__Tasks__AssignedT__531856C7">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__CreatedBy__540C7B00" Association="Self.FK__Tasks__CreatedBy__540C7B00">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="wpfCrudModelStoreContainer" CdmEntityContainer="wpfCrudEntities1">
+          <EntitySetMapping Name="Aisles">
+            <EntityTypeMapping TypeName="wpfCrudModel.Aisle">
+              <MappingFragment StoreEntitySet="Aisles">
+                <ScalarProperty Name="AisleID" ColumnName="AisleID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LayerCount" ColumnName="LayerCount" />
+                <ScalarProperty Name="CellCount" ColumnName="CellCount" />
+                <ScalarProperty Name="RowCount" ColumnName="RowCount" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="warehousesId" ColumnName="warehousesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cells">
+            <EntityTypeMapping TypeName="wpfCrudModel.Cell">
+              <MappingFragment StoreEntitySet="Cells">
+                <ScalarProperty Name="CellID" ColumnName="CellID" />
+                <ScalarProperty Name="AisleID" ColumnName="AisleID" />
+                <ScalarProperty Name="XCoordinate" ColumnName="XCoordinate" />
+                <ScalarProperty Name="YCoordinate" ColumnName="YCoordinate" />
+                <ScalarProperty Name="ZCoordinate" ColumnName="ZCoordinate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="wpfCrudModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="wpfCrudModel.member">
+              <MappingFragment StoreEntitySet="members">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Despatched" ColumnName="Despatched" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="PackingList" ColumnName="PackingList" />
+                <ScalarProperty Name="Quantity_r" ColumnName="Quantity_r" />
+                <ScalarProperty Name="Sold" ColumnName="Sold" />
+                <ScalarProperty Name="Invoice" ColumnName="Invoice" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="warehousesId" ColumnName="warehousesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackingLists">
+            <EntityTypeMapping TypeName="wpfCrudModel.PackingList">
+              <MappingFragment StoreEntitySet="PackingList">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskHistories">
+            <EntityTypeMapping TypeName="wpfCrudModel.TaskHistory">
+              <MappingFragment StoreEntitySet="TaskHistory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="wpfCrudModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="wpfCrudModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouses">
+            <EntityTypeMapping TypeName="wpfCrudModel.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouses">
+                <ScalarProperty Name="warehousesId" ColumnName="warehousesId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

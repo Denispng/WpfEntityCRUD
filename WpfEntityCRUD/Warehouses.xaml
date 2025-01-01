@@ -1,0 +1,123 @@
+﻿<Page x:Class="WpfEntityCRUD.Warehouses"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfEntityCRUD"
+      mc:Ignorable="d" 
+          Title="Warehouses" FontFamily="arial" >
+    <Page.Resources>
+        <!-- DataGrid Style -->
+        <Style x:Key="CustomDataGridStyle" TargetType="DataGrid">
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="CanUserDeleteRows" Value="False"/>
+            <Setter Property="CanUserReorderColumns" Value="False"/>
+            <Setter Property="CanUserResizeColumns" Value="True"/>
+            <Setter Property="CanUserResizeRows" Value="True"/>
+            <Setter Property="CanUserSortColumns" Value="True"/>
+            <Setter Property="ColumnHeaderHeight" Value="35"/>
+            <Setter Property="RowHeight" Value="30"/>
+            <Setter Property="AlternatingRowBackground" Value="#F0F0F0"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionUnit" Value="FullRow"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#D3D3D3"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#D3D3D3"/>
+            <Setter Property="ColumnWidth" Value="*"/>
+        </Style>
+
+        <!-- DataGridCell Style -->
+        <Style x:Key="CustomDataGridCellStyle" TargetType="DataGridCell">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- DataGridColumnHeader Style -->
+        <Style x:Key="CustomDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+
+            <Setter Property="Background" Value="#0078D7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+         
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid Background="#F4F4F4">
+            <Grid.ColumnDefinitions>
+                <!-- Sidebar column -->
+                <ColumnDefinition Width="200" />
+                <!-- Content column -->
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Sidebar -->
+            <Grid Grid.Column="0" Background="#272B2F">
+                <StackPanel Margin="0,20,0,0">
+                    <!-- Header -->
+                    <TextBlock Text="Warehouses" 
+                           Foreground="White" 
+                           FontFamily="Segoe UI" 
+                           FontSize="18" 
+                           FontWeight="Bold" 
+                           HorizontalAlignment="Center" 
+                           Margin="0,10,0,20"/>
+
+                    <!-- Navigation Buttons -->
+                    <Button Content="Back" 
+                        Margin="20,10" 
+                        Height="40" 
+                        Background="#0078D7" 
+                        Foreground="White" 
+                        FontWeight="Bold"
+                        BorderThickness="0"
+                        Click="BackBtn_Click" 
+                            />
+
+
+                </StackPanel>
+            </Grid>
+
+            <DataGrid Grid.Column="1" x:Name="warehousesDataGrid" Style="{StaticResource CustomDataGridStyle}"
+                  CellStyle="{StaticResource CustomDataGridCellStyle}"
+                  ColumnHeaderStyle="{StaticResource CustomDataGridColumnHeaderStyle}"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn x:Name="d" Header="Code" Binding="{Binding warehousesId}" />
+                    <DataGridTextColumn Header="Warehouse" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Address" Binding="{Binding Location}" />
+
+
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Action" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                                    <Button BorderBrush="Transparent"    Width="100"  
+   
+Foreground="White" 
+FontWeight="SemiBold" FontSize="8"
+BorderThickness="0" 
+Cursor="Hand" Background="#0078D7" x:Name="updateBtn" Content="Update" Click="updateBtn_Click" />
+                                    
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
+            </Grid>
+    </Grid>
+    </Page>

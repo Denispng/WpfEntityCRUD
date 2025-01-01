@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="69d76302bf84440699b09bb3d8beb79e" Name="Diagram1" ZoomLevel="34">
+        <EntityTypeShape EntityType="wpfCrudModel.Aisle" Width="1.5" PointX="5.25" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="wpfCrudModel.Cell" Width="1.5" PointX="10.5" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="wpfCrudModel.Company" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wpfCrudModel.member" Width="1.5" PointX="8.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wpfCrudModel.PackingList" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="wpfCrudModel.TaskHistory" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="wpfCrudModel.Task" Width="1.5" PointX="5.25" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="wpfCrudModel.User" Width="1.5" PointX="3" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="wpfCrudModel.Warehouse" Width="1.5" PointX="3" PointY="24.75" IsExpanded="true" />
+        <AssociationConnector Association="wpfCrudModel.FK__Cells__AisleID__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="wpfCrudModel.FK_Aisles_Warehouses" ManuallyRouted="false" />
+        <AssociationConnector Association="wpfCrudModel.FK_Company1" ManuallyRouted="false" />
+        <AssociationConnector Association="wpfCrudModel.FK__Cells__Id__756D6ECB" ManuallyRouted="false" />
+        <AssociationConnector Association="wpfCrudModel.FK_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="wpfCrudModel.FK_Members_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="wpfCrudModel.FK_PackingList_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="wpfCrudModel.FK_TaskHistory_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="wpfCrudModel.FK_Users_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="wpfCrudModel.FK_Warehouses_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="wpfCrudModel.FK_Members_Warehouses" ManuallyRouted="false" />
+        <AssociationConnector Association="wpfCrudModel.FK__Tasks__AssignedT__531856C7" ManuallyRouted="false" />
+        <AssociationConnector Association="wpfCrudModel.FK__Tasks__CreatedBy__540C7B00" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

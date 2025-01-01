@@ -1,0 +1,103 @@
+﻿<Window x:Class="WpfEntityCRUD.RateCalculator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfEntityCRUD"
+        mc:Ignorable="d"
+        Title="RateCalculator" Height="450" Width="800">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <!-- Ship From Section -->
+            <GroupBox Header="Ship From Details" Margin="0,10">
+                <StackPanel Margin="10">
+                    <TextBlock Text="Enter Sender's Name" Margin="0,5" />
+                    <TextBox x:Name="txtFromName" Margin="0,5" />
+
+                    <TextBlock Text="Enter Phone Number" Margin="0,5" />
+                    <TextBox x:Name="txtFromPhone" Margin="0,5" />
+
+                    <TextBlock Text="Enter Company Name (Optional)" Margin="0,5" />
+                    <TextBox x:Name="txtFromCompany" Margin="0,5" />
+
+                    <TextBlock Text="Enter Address" Margin="0,5" />
+                    <TextBox x:Name="txtFromAddress" Margin="0,5" />
+
+                    <TextBlock Text="Enter City" Margin="0,5" />
+                    <TextBox x:Name="txtFromCity" Margin="0,5" />
+
+                    <TextBlock Text="Enter State" Margin="0,5" />
+                    <TextBox x:Name="txtFromState" Margin="0,5" />
+
+                    <TextBlock Text="Enter Postal Code" Margin="0,5" />
+                    <TextBox x:Name="txtFromPostal" Margin="0,5" />
+
+                    <TextBlock Text="Enter Country Code (e.g., US)" Margin="0,5" />
+                    <TextBox x:Name="txtFromCountry" Margin="0,5" />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Ship To Section -->
+            <GroupBox Header="Ship To Details" Margin="0,10">
+                <StackPanel Margin="10">
+                    <TextBlock Text="Enter Recipient's Name" Margin="0,5" />
+                    <TextBox x:Name="txtToName" Margin="0,5" />
+
+                    <TextBlock Text="Enter Phone Number" Margin="0,5" />
+                    <TextBox x:Name="txtToPhone" Margin="0,5" />
+
+                    <TextBlock Text="Enter Company Name (Optional)" Margin="0,5" />
+                    <TextBox x:Name="txtToCompany" Margin="0,5" />
+
+                    <TextBlock Text="Enter Address" Margin="0,5" />
+                    <TextBox x:Name="txtToAddress" Margin="0,5" />
+
+                    <TextBlock Text="Enter City" Margin="0,5" />
+                    <TextBox x:Name="txtToCity" Margin="0,5" />
+
+                    <TextBlock Text="Enter State" Margin="0,5" />
+                    <TextBox x:Name="txtToState" Margin="0,5" />
+
+                    <TextBlock Text="Enter Postal Code" Margin="0,5" />
+                    <TextBox x:Name="txtToPostal" Margin="0,5" />
+
+                    <TextBlock Text="Enter Country Code (e.g., US)" Margin="0,5" />
+                    <TextBox x:Name="txtToCountry" Margin="0,5" />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Package Details Section -->
+            <GroupBox Header="Package Details" Margin="0,10">
+                <StackPanel Margin="10">
+                    <TextBlock Text="Enter Package Weight" Margin="0,5" />
+                    <TextBox x:Name="txtPackageWeight" Margin="0,5" />
+
+                    <TextBlock Text="Select Weight Unit" Margin="0,5" />
+                    <ComboBox x:Name="cmbWeightUnit" Margin="0,5">
+                        <ComboBoxItem Content="ounce" IsSelected="True" />
+                        <ComboBoxItem Content="pound" />
+                        <ComboBoxItem Content="gram" />
+                        <ComboBoxItem Content="kilogram" />
+                    </ComboBox>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Carrier Options -->
+            <GroupBox Header="Carrier and Service Options" Margin="0,10">
+                <StackPanel Margin="10">
+                    <TextBlock Text="Select Carrier" Margin="0,5" />
+                    <ComboBox x:Name="cmbCarrier" SelectionChanged="cmbCarrier_SelectionChanged" Margin="0,5"  />
+
+                    <TextBlock Text="Select Service" Margin="0,5" />
+                    <ComboBox x:Name="cmbOperation" Margin="0,5" />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
+                <Button x:Name="btnCalculateRates" Click="btnCalculateRates_Click" Content="Calculate Rates" Margin="10" Width="150" Height="30" />
+                <Button x:Name="btnGenerateLabel" Content="Generate Label" Margin="10" Width="150" Height="30" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

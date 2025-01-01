@@ -1,0 +1,38 @@
+﻿<Window x:Class="WpfEntityCRUD.UpdateSold"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfEntityCRUD"
+      mc:Ignorable="d" 
+      Height="200" Width="350"
+      Title="Update Sold"
+      FontFamily="Arial">
+
+    <Grid Background="#272B2F" >
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0">
+            <Border BorderThickness="1" BorderBrush="White" CornerRadius="3">
+            <!-- Instruction Text with Separator -->
+            <TextBlock HorizontalAlignment="Center" Foreground="White" FontSize="14" TextWrapping="Wrap" TextAlignment="Center" >
+                Insert the number of items 
+                <LineBreak/>
+                
+                sold in the last 30 days
+            </TextBlock>
+            </Border>
+            <!-- TextBox for input -->
+            <TextBox   PreviewTextInput="NumericTextBox_PreviewTextInput" 
+         PreviewKeyDown="NumericTextBox_PreviewKeyDown"  Margin="0,10,0,0" x:Name="soldtextBox" Width="120" Height="30" HorizontalAlignment="Center" Background="White" FontSize="14" />
+
+            <!-- Buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <!-- Insert Button -->
+                <Button x:Name="updateBtn" FontWeight="Bold" Content="Insert" Width="100" Height="40" Background="LightBlue" Foreground="WHITE" FontSize="14" Click="updateBtn_Click"/>
+
+                <!-- Calculate Button -->
+                <Button x:Name="calculateBtn" FontWeight="Bold" Content="Calculate" Width="100" Height="40" Background="LightBlue" Foreground="WHITE" FontSize="14" Click="Button_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

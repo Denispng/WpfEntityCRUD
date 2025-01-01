@@ -1,0 +1,460 @@
+﻿<Window x:Class="WpfEntityCRUD.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfEntityCRUD"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1100"  WindowState="Maximized"
+        FontFamily="Candara"     
+        Icon="Images/logo3.png"
+        >
+    <Window.Resources>
+        <Style x:Key="CustomDataGridStyle" TargetType="DataGrid">
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="CanUserDeleteRows" Value="False"/>
+            <Setter Property="CanUserReorderColumns" Value="False"/>
+            <Setter Property="CanUserResizeColumns" Value="True"/>
+            <Setter Property="CanUserResizeRows" Value="True"/>
+            <Setter Property="CanUserSortColumns" Value="True"/>
+            <Setter Property="ColumnHeaderHeight" Value="35"/>
+            <Setter Property="RowHeight" Value="20"/>
+            <Setter Property="AlternatingRowBackground" Value="#F0F0F0"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionUnit" Value="FullRow"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#D3D3D3"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#D3D3D3"/>
+            <Setter Property="ColumnWidth" Value="*"/>
+        </Style>
+
+        <!-- DataGridCell Style -->
+        <Style x:Key="CustomDataGridCellStyle" TargetType="DataGridCell">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- DataGridColumnHeader Style -->
+        <Style x:Key="CustomDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+
+            <Setter Property="Background" Value="#0078D7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="21"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+        </Style>
+        <!-- Slide Out Animation -->
+        <Storyboard x:Key="SlideOut">
+            <DoubleAnimation Storyboard.TargetName="SideMenu" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" 
+                         From="-250" To="0" Duration="0:0:0.3" />
+        </Storyboard>
+
+        <!-- Slide In Animation -->
+        <Storyboard x:Key="SlideIn">
+            <DoubleAnimation Storyboard.TargetName="SideMenu" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" 
+                         From="0" To="-250" Duration="0:0:0.3" />
+        </Storyboard>
+    </Window.Resources>
+
+    <DockPanel>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="60*"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="MainContent" Background="#272B2F" >
+                <Button BorderBrush="Transparent"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="50"  Click="MenuButton_Click" Background="Transparent">
+                    <StackPanel>
+                        <Image Stretch="Uniform"   Source="Images/icons8-arrow-100.png" Width="40" Height="30" >
+
+                        </Image>
+
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Column="0" Background="#272B2F" Visibility="Visible" x:Name="SideMenu">
+                <Grid.RenderTransform>
+                    <TranslateTransform X="-200" />
+                </Grid.RenderTransform>
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+
+                    <RowDefinition></RowDefinition>
+
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+
+
+
+                    <RowDefinition></RowDefinition>
+
+
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Height="100" Width="190" >
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image Margin="0,0,0,5" Height="30" Source="Images/logo3.png"></Image>
+                        <TextBlock Text="StockSolve" 
+Foreground="White" 
+FontFamily="Segoe UI" 
+FontSize="18" 
+FontWeight="Bold" 
+HorizontalAlignment="Center" 
+Margin="0,10,20,20" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+
+
+                <Grid  Grid.Row="1" Background="Transparent">
+
+                    <Button Height="40" x:Name="insertBtn"  Click="insertBtn_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,50,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-add-item-48 (1).png" Width="40" Height="22" Margin="0,5,0,0">
+
+                            </Image>
+                            <TextBlock Margin="0,5,0,0" FontWeight="UltraLight" FontSize="19" Foreground="White">Add Item</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                </Grid>
+                <Grid  Grid.Row="2">
+                    <Button Height="40" x:Name="StatsBtn" Click="statsBtn_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,50,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-statistics-64.png" Width="35" Height="25" >
+
+                            </Image>
+                            <TextBlock Margin="0,4,0,0" FontWeight="Thin" FontSize="19"  Foreground="White">Statistics</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="3">
+
+                    <Button  Height="40" x:Name="button2"  Foreground="white" Click="InvoicesBtn_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,56,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-invoices-60.png" Width="34" Height="22" >
+
+                            </Image>
+                            <TextBlock Margin="0,2,0,0" FontWeight="Thin" FontSize="19">Invoices</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="4">
+                    <Button  Height="40" x:Name="button3" Foreground="White" Click="forecastingBtn_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,30,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-forecasting-64.png" Width="34" Height="22" >
+
+                            </Image>
+                            <TextBlock Margin="0,4,0,0" FontWeight="Thin" FontSize="19">Forecasting</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="5">
+                    <Button  Height="40" x:Name="button4" Foreground="White"  Click="warehousesBtn_Click" Background="Transparent" BorderBrush="Transparent"  >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,23,0"  >
+                            <StackPanel.Resources>
+
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"  Source="Images/icons8-warehouse-40 (1).png" Width="36" Height="22" />
+                            <TextBlock FontWeight="Thin" FontSize="19"><Run Text="Warehouses"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="6">
+                    <Button Height="40" x:Name="StatsBtn1" Click="marketBtn_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,50,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-marketplace-50.png" Width="40" Height="23" >
+
+                            </Image>
+                            <TextBlock Margin="0,4,0,0" FontWeight="Thin" FontSize="19"  Foreground="White">Market P</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="7">
+
+                    <Button  Height="40"  x:Name="Support" Foreground="White"  Click="supportBtn_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,53,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-support-32.png" Width="26" Height="22" />
+                            <TextBlock FontWeight="Thin" FontSize="19" ><Run Text="Support"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="9">
+                    <Button  Height="40"  x:Name="Map" Foreground="White"  Click="MapBtn_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="-75,0,0,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-map-50 (1).png" Width="26" Height="22" />
+                            <TextBlock FontWeight="Thin" FontSize="19" ><Run Text="Map"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="16">
+
+
+                    <Button  Height="40"  x:Name="addUserBtn"  Foreground="White"  Click="addUserBtn_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,40,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-add-item-48 (1).png" Width="26" Height="22" >
+
+                            </Image>
+                            <TextBlock FontWeight="Thin" FontSize="19" ><Run Text="Add User"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="14">
+                    <Button  Height="40"  x:Name="assignTaskBtn"  Foreground="White"  Click="assignTaskBtn_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,24,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-allocate-48.png" Width="26" Height="22" >
+
+                            </Image>
+                            <TextBlock FontWeight="Thin" FontSize="19" ><Run Text="Assign Task"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="10">
+                    <Button  Height="40"  x:Name="viewTasksBtn"  Foreground="White"  Click="viewTasksBtn_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,72,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-task-50 (1).png" Width="26" Height="22" >
+
+                            </Image>
+                            <TextBlock FontWeight="Thin" FontSize="19" ><Run Text="Tasks"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="15">
+                    <Button  Height="40"  x:Name="deleteUserBtn"  Foreground="White"  Click="deleteUserBtn_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,20,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-delete-40 (1).png" Width="26" Height="22" >
+
+                            </Image>
+                            <TextBlock FontWeight="Thin" FontSize="19" ><Run Text="Delete User"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="11">
+                    <Button  Height="40"  x:Name="Histoy"  Foreground="White"  Click="History_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,57,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-history-48.png" Width="26" Height="22" >
+
+                            </Image>
+                            <TextBlock FontWeight="Thin" FontSize="19" ><Run Text="History"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="12">
+                    <Button  Height="40"  x:Name="Shipping"  Foreground="White"  Click="Shipping_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,43,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-history-48.png" Width="26" Height="22" >
+
+                            </Image>
+                            <TextBlock FontWeight="Thin" FontSize="19" ><Run Text="Shipping"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="13">
+                    <Button  Height="40"  x:Name="TaxInfo" Click="Tax_Click" Foreground="White"  Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,46,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-history-48.png" Width="26" Height="22" >
+
+                            </Image>
+                            <TextBlock FontWeight="Thin" FontSize="19" ><Run Text="Tax Info"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+
+
+                <Grid  Grid.Row="17">
+                    <Button VerticalAlignment="Bottom"  Height="40"  x:Name="Collapse"  Foreground="White"  Click="CloseMenu_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,53,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-arrow-101.png" Width="26" Height="22" >
+
+                            </Image>
+                            <TextBlock FontWeight="Thin" FontSize="19" ><Run Text="Collapse"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid  Grid.Row="8">
+                    <Button VerticalAlignment="Bottom"  Height="40"    Foreground="White"  Click="List_Click" Background="Transparent" BorderBrush="Transparent" >
+                        <StackPanel Orientation="Horizontal" Margin="0,0,25,0"  >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image Stretch="Uniform"   Source="Images/icons8-list-48.png" Width="26" Height="22" >
+
+                            </Image>
+                            <TextBlock FontWeight="Thin" FontSize="19" ><Run Text="Packing List"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"></RowDefinition>
+                    <RowDefinition Height="100*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.Background>
+                    <ImageBrush ImageSource="Images/back.png" Opacity="0.05" />
+                </Grid.Background>
+                
+             
+                    <StackPanel  Orientation="Vertical" >
+                        <TextBlock FontWeight="DemiBold" Opacity="0.5" FontFamily="arial"><Run Text="Insert Code, Description, or Warehouse ID"/></TextBlock>
+                        <TextBox  x:Name="SearchTextBox" Height="20"  HorizontalAlignment="Left" Width="100" Margin="0,0,0,5" TextChanged="SearchTextBox_TextChanged"/>
+                       
+
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" GridLinesVisibility="Vertical" FontFamily="Arial" x:Name="myDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" Opacity="0.9"  Style="{StaticResource CustomDataGridStyle}"
+                  CellStyle="{StaticResource CustomDataGridCellStyle}"
+                  ColumnHeaderStyle="{StaticResource CustomDataGridColumnHeaderStyle}" RowBackground="Transparent">
+
+
+
+
+                        <DataGrid.AlternatingRowBackground>
+                            <SolidColorBrush Color="LightBlue" Opacity="0.2"/>
+                        </DataGrid.AlternatingRowBackground>
+
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn x:Name="d" Header="Code" Binding="{Binding Id}" />
+                            <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
+                            <DataGridTextColumn Header="Price per unit" Binding="{Binding Price}" />
+                            <DataGridTextColumn x:Name="a" Header="Description" Binding="{Binding Description}" />
+                            <DataGridTextColumn Header="Location" Binding="{Binding warehousesId}" />
+                            <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
+                            <DataGridTextColumn Header="Dispatched" Binding="{Binding Despatched}" />
+                            <DataGridTextColumn Header="Supplier" Binding="{Binding Supplier}" />
+
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="Action" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                                            <Button BorderBrush="Transparent"      
+   
+     Foreground="White" 
+     FontWeight="SemiBold" FontSize="8"
+     BorderThickness="0" 
+     Cursor="Hand" Background="#0078D7" x:Name="updateBtn" Content="Update" Click="updateBtn_Click" />
+                                            <Button      
+   
+     Foreground="White" 
+     FontWeight="SemiBold" FontSize="8"
+     BorderThickness="0" 
+     Cursor="Hand" BorderBrush="Transparent" Background="#0078D7" x:Name="deleteBtn" Content="Delete" Click="deleteBtn_Click"  />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+              
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>
